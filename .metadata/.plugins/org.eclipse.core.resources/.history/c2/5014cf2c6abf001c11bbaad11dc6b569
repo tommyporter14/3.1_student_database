@@ -1,0 +1,98 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class student_database_attempt_2 {
+
+	public static void main(String[] args) {
+		Scanner	scnr = new Scanner(System.in);
+		String[] studentsFirst = {"Patrick","James","Caelin","Nick","Dakota"};
+		String[] studentsLast = {"Smith","Johnshon","Wallace","Jones","Mann"};
+		String[] hometown = {"Royal Oak","Berkley","Detroit","Oak Park","Southfield"};
+		String[] favFood = {"Pizza","Burgers","Pasta","Salad","Chinese"};
+
+		System.out.println("Welcome to our Java class. Which student would you like to learn more about? (enter a number 1-5):");
+		boolean studentRepeat = true;
+		
+		while (studentRepeat)
+		{
+			try 
+			{
+				int userNumber = scnr.nextInt();
+				
+				boolean infoRepeat = true;
+				
+				while (infoRepeat)
+				{
+					printInfo(userNumber, studentsFirst, studentsLast);
+					String choiceOne = scnr.nextLine();
+					
+					if (choiceOne.equalsIgnoreCase("favorite food"))
+					{
+						printFood(userNumber, studentsFirst, favFood);
+						if (!yesNoChoice(scnr)) 
+						{
+								infoRepeat = false;
+						}
+					}
+					else if (choiceOne.equalsIgnoreCase("hometown"))
+					{
+						printHome(userNumber, studentsFirst, hometown);
+						if (!yesNoChoice(scnr)) 
+						{
+								infoRepeat = false;
+						}
+					}
+					else
+					{
+						System.out.println("Invalid input. (enter 'hometown' or 'favorite food'):");
+					}
+				}
+				System.out.println("Would you like to learn about another student? (enter 'yes' or 'no'):");
+				if (!yesNoChoice(scnr)) 
+				{
+					studentRepeat = false;
+				} 
+				else 
+				{
+					System.out.print("Which student would you like to learn more about? (enter a number 1-5): ");
+				}
+				
+			}
+		}
+	}
+	
+	public static void printInfo(int n, String first[], String last[])
+	{
+		System.out.println("Student " + n + " is " + first[n - 1] + " " + last[n-1] + ". What would you like to know about " + first[n-1] + "? (enter 'hometown' or 'favorite food'): ");
+	}
+	public static void printFood(int n, String first[], String food[]) 
+	{
+		System.out.print(first[n-1] + "'s favorite food is " + food[n-1] + ". Would you like to know more? (enter 'yes' or 'no'):");
+	}
+	public static void printHome(int n, String first[], String town[]) 
+	{
+		System.out.print(first[n-1] + " is from " + town[n-1] + ". Would you like to know more? (enter 'yes' or 'no'):");
+	}
+	public static boolean yesNoChoice(Scanner scnr) 
+	{
+		try 
+		{
+			String choice = scnr.next();
+			
+				if (!choice.equalsIgnoreCase("yes") && !choice.equalsIgnoreCase("no")) {
+					throw new InputMismatchException("Input must be 'yes' or 'no'");
+				}
+				
+				if (choice.equalsIgnoreCase("yes")) {
+					return true;
+				} else {
+					return false;
+				}
+		} 
+		catch (InputMismatchException e) 
+		{
+			System.out.print("I'm not sure what you want. Please enter y or n: ");
+			return (yesNoChoice(scnr));
+		}
+	}
+}
