@@ -102,7 +102,7 @@ public class student_database_attempt_2 {
 		} 
 		catch (InputMismatchException e) 
 		{
-			System.out.print("Invalid Input. Please enter 'yes' or 'no': ");
+			System.out.print("I'm not sure what you want. Please enter 'yes' or 'no': ");
 			return (yesNoChoice(scnr));
 		}
 	}
